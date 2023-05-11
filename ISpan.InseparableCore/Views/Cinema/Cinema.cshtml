@@ -1,0 +1,51 @@
+﻿@model ISpan.InseparableCore.ViewModels.CcinemaVM
+@{
+    ViewData["Title"] = "List2";
+}
+
+<h1>影城介紹</h1>
+@section Styles{
+    <link href="~/css/loading.css" rel="stylesheet" />
+    <link href="~/css/Cinema.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+}
+<div>
+    <div class="loadingdiv" id="loading" style="display: none">
+        <img src="~/images/Infinity-1s-200px.gif" />
+    </div>
+    <div id="city">
+        @if (Model.city != null)
+        {
+            foreach (var item in Model.city)
+            {
+                <button class="city btn btn-outline-primary" value="@item">@item</button>
+            }
+        }
+    </div>
+    <div id="brand">
+        @if (Model.brand != null)
+        {
+            foreach (var item in Model.brand)
+            {
+                <button class="brand btn btn-outline-primary" value="@item">@item</button>
+            }
+
+        }
+    </div>
+</div>
+<div style="display:flex;">
+    <div id="cinema"></div>
+    <div id="show">
+        <h5></h5>
+        <div id="map"></div>
+        <div id="traffic"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/Cinema.js"></script>
+}

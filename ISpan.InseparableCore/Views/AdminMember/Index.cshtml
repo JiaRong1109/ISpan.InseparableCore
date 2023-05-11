@@ -1,0 +1,132 @@
+﻿@model IEnumerable<ISpan.InseparableCore.Models.DAL.TMembers>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .divContainer {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+    }
+
+    .inDivPosition {
+        position: relative;
+        bottom: -28px;
+    }
+</style>
+
+<h1>會員管理</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-rounded btn-success">新增會員</a>
+</p>
+<p>
+    <form asp-action="" method="get">
+        <div class="divContainer">
+            <div class="form-group col-md-4">
+                <label for="txtKeyword">關鍵字：</label>
+                <input class="input-validation-error form-control text-light" id="txtKeyword" name="txtKeyword" type="text" value="@ViewBag.SearchKeyword" placeholder="可搜尋姓氏、名字、會員ID、Email">
+            </div>
+            <div class="form-group inDivPosition col-md-2">
+                <input type="submit" class="btn btn-rounded btn-info" style="margin-left:15px;" value="搜尋" />
+            </div>
+        </div>
+
+    </form>
+
+</p>
+<table class="table text-light">
+    <thead>
+        <tr>
+
+            <th>
+                @*@Html.DisplayNameFor(model => model.FMemberId)*@
+                會員ID
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FLastName)*@
+                姓氏
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FFirstName)*@
+                名字
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FEmail)*@
+                Email
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FGender)*@
+                性別
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FCellphone)*@
+                手機
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FAreaZipCodeNavigation)*@
+                區域
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.FAccountStatusNavigation)*@
+                會員狀態
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.)*@
+                註冊時間
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+
+                var dateOfBirth = "";
+                if (item.FDateOfBirth.HasValue)
+                {
+                    dateOfBirth = item.FDateOfBirth.Value.ToString("yyyy-MM-dd");
+                }
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FMemberId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FGender.FGenderType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FCellphone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FArea.FAreaName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FAccountStatusNavigation.FStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FSignUpTime)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.FId" class="btn btn-warning">編輯</a> |
+                        <a asp-action="Details" asp-route-id="@item.FId" class="btn btn-light">明細</a> |
+                        <a asp-action="Deactivate" asp-route-id="@item.FId" class="btn btn-danger">註銷</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,25 @@
+﻿body {
+}
+.form-group label {
+	font-size: 0.875rem;
+	line-height: 1;
+	vertical-align: baseline;
+	font-size: 20px;
+}
+
+p {
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+}
+td {
+	max-height: 100px;
+	max-width: 200px;
+	word-wrap: break-word;
+}
+.space-container {
+	text-align: center;
+	white-space: normal;
+}

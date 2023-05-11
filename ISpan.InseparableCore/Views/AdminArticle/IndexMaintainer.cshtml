@@ -1,0 +1,366 @@
+﻿@model IEnumerable<ISpan.InseparableCore.ViewModels.ArticleSearchVm>
+
+@{
+	var pagedList = (IPagedList)ViewBag.ArticleModel;
+}
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core.Fluent
+@using X.PagedList.Web.Common
+@section Styles{
+	<link href="~/css/loading.css" rel="stylesheet" />
+	<link href="~/css/IndexGeneral.css" rel="stylesheet" />
+	<link href="~/css/IndexMaintainer.css" rel="stylesheet" />
+}
+
+<style>
+	.Delete{
+
+	}
+	#Key, #CategoryId{
+		color: aliceblue;
+		font-size: 15px;
+	}
+
+		#Key:focus {
+			color: aliceblue;
+		}
+
+	p, button {
+		font-size: 15px;
+	}
+
+	.inDivBottom {
+		position: absolute;
+		bottom: 0px;
+		right: -100px;
+	}
+	.inDivPosition {
+		position: relative;
+		bottom: -20px;
+		right: -700px;
+	}
+
+</style>
+    <div class="loadingdiv" id="loading" style="display: none">
+        <img src="~/images/Infinity-1s-200px.gif" />
+    </div>
+
+<h1 style="margin:20px;">論壇</h1>
+
+<div class="row divBlock">
+	<form asp-action="Index" method="post" id="formSearch">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="divContainer ">
+			<div class="form-group divBlock">
+				<label name="Key"  class="control-label">關鍵字</label>
+				<input name="Key" id="Key" class="form-control" />
+			</div>
+			<div class="form-group divBlock">
+				<label name="CategoryId" class="control-label">類別</label>
+				<select name="CategoryId" id="CategoryId" class="form-control" asp-items="ViewBag.FMovieCategoryId"></select>
+			</div>
+			<div class="form-group divBlock" style="position:relative">
+				<input type="submit" value="搜尋" class="btn btn-info btn-rounded inDivBottom" />
+			</div>
+		</div>
+	</form>
+</div>
+<div class="">
+    <table class="table table-dark table-striped table-hover" style="color:#D4D6D6;">
+		<thead>
+			<tr>
+				<th>
+					<p>
+						@Html.DisplayNameFor(model => model.FArticleId)
+					</p>
+				</th>
+				<th>
+					<p>
+						@Html.DisplayNameFor(model => model.FArticleTitle)
+					</p>
+				</th>
+				<th>
+					<p>
+						@Html.DisplayNameFor(model => model.PartialContent)
+					</p>
+				</th>
+				<th>
+					<p>
+						@Html.DisplayNameFor(model => model.ArticleCategory)
+					</p>
+				</th>
+				<th>
+					<p>
+						@Html.DisplayNameFor(model => model.MemberName)
+					</p>
+				</th>
+				<th>
+					<p>
+						@Html.DisplayNameFor(model => model.FArticleLikes)
+					</p>
+				</th>
+				<th>
+					<p>
+						@Html.DisplayNameFor(model => model.FArticleClicks)
+					</p>
+				</th>
+				<th>
+					<p>
+						@Html.DisplayNameFor(model => model.PostingDate)
+					</p>
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody  id="tableSearch">
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						<p>
+							@Html.DisplayFor(modelItem => item.FArticleId)
+						</p>
+					</td>
+					<td>
+						<p class="space-container">
+							@Html.DisplayFor(modelItem => item.FArticleTitle)
+						</p>
+					</td>
+					<td>
+						<p class="space-container">
+							@Html.DisplayFor(modelItem => item.PartialContent)
+						</p>
+					</td>
+					<td>
+						<p>
+							@Html.DisplayFor(modelItem => item.ArticleCategory)
+						</p>
+					</td>
+					<td>
+						<p>
+							@Html.DisplayFor(modelItem => item.MemberName)
+						</p>
+					</td>
+					<td>
+						<p>
+							@Html.DisplayFor(modelItem => item.FArticleLikes)
+						</p>
+					</td>
+					<td>
+						<p>
+							@Html.DisplayFor(modelItem => item.FArticleClicks)
+						</p>
+					</td>
+					<td>
+						<p>
+							@Html.DisplayFor(modelItem => item.PostingDate)
+						</p>
+					</td>
+					<td>
+						<div class="divContainer" style="width:100px">
+							<div>
+								<a asp-action="AdminDetails" asp-route-id="@item.FArticleId" class="btn btn-light ">內容</a>&nbsp;|&nbsp;
+							</div>
+							<div>
+								<button value="@item.FArticleId" class="btn btn-danger Delete">
+									刪除
+								</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<div id="divDataCount">
+		<p class="text-muted" colspan="5">
+			每頁 @pagedList.PageSize 筆資料，共 @pagedList.PageCount 頁，全部共有 @pagedList.TotalItemCount 筆資料。
+		</p>
+	</div>
+</div>
+
+<div style=" font-size:larger" class="">
+	<div class="btn-toolbar  " role="toolbar" aria-label="Toolbar with button groups" style="text-align:center;">
+		<div class="btn-group " role="group" aria-label="First group" id="divPageContainer" style="margin:10px auto; ">
+			<button type="button" class="btn btn-secondary" id="prePage"><</button>
+			<button type="button" class="btn btn-primary btnPage"  id="1" value="1">1</button>
+			@for (int i = 2; i < pagedList.PageCount + 1; i++)
+			{
+				<button type="button" class="btn btn-secondary btnPage"  id="@i" value="@i">@i</button>
+			}
+			<button type="button" class="btn btn-secondary" id="nextPage">></button>
+		</div>
+	</div>
+</div>
+<input type="hidden" value="@ViewBag.errorMessage" id="error" />
+
+@section Scripts {
+		<script type="text/javascript" src="~/js/swalConfirm.js"></script>
+
+	<script>
+		@{
+			if (!string.IsNullOrEmpty(ViewBag.errorMessage))
+			{
+					@:let error = $("#error").val();
+					@:alert(error)
+			}
+		}
+
+		var PageCountNumber = @pagedList.PageCount
+		var pageNumber = 1
+
+		function show(Key, CategoryId, Page) {
+			$.ajax({
+				method: "post",
+				url: $(this).attr("action"),
+				data: {Key, CategoryId, Page},
+				success: function (data) {
+					$("#tableSearch").html(``)
+					if (data == "noData") 
+					{
+						$("#tableSearch").html(`
+							<p class="text-muted" colspan="5">
+								每頁 0 筆資料，共 0 頁，全部共有 0 筆資料。
+							</p>
+						`)
+						return;
+					}
+					let context = JSON.parse(data);
+					$.each(context.Vm, function (index, value) {
+
+						$("#tableSearch").append(`
+							<tr>
+								<td>
+									<p>
+										${value.FArticleId}
+									</p>
+								</td>
+								<td>
+									<p class="space-container">
+										${value.FArticleTitle}
+									</p>
+								</td>
+								<td>
+									<p class="space-container">
+										${value.PartialContent}
+									</p>
+								</td>
+								<td>
+									<p>
+										${value.ArticleCategory}
+									</p>
+								</td>
+								<td>
+									<p>
+										${value.MemberName}
+									</p>
+								</td>
+								<td>
+									<p>
+										${value.FArticleLikes}
+									</p>
+								</td>
+								<td>
+									<p>
+										${value.FArticleClicks}
+									</p>
+								</td>
+								<td>
+									<p>
+										${value.PostingDate}
+									</p>
+								</td>
+								<td>
+									<div class="divContainer" style="width:100px">
+										<div>
+											<a href="/AdminArticle/AdminDetails/${value.FArticleId}" class="btn btn-light">內容</a>&nbsp;|&nbsp
+										</div>
+										<div>
+											<div class="" style="width:100px" id="form${value.FArticleId}Container">	
+												<button value="${value.FArticleId}" class="btn btn-danger Delete"
+												style="">刪除</button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						`)
+					})
+					$("#divDataCount").html(`
+						<p class="text-muted" colspan="5">
+							每頁 ${context.PageSize} 筆資料，共 ${context.PageCount} 頁，全部共有 ${context.TotalItemCount} 筆資料。
+						<p>
+					`)
+					if(PageCountNumber != context.PageCount){
+						PageCountNumber = context.PageCount
+						$("#divPageContainer").html(`
+						`)
+						$("#divPageContainer").append(`
+							<button type="button" class="btn btn-secondary" id="prePage"><</button>
+						`)
+						$("#divPageContainer").append(`
+							<button type="button" class="btn btn-primary btnPage"  id="1" value="1">1</button>
+						`)
+						for (let i = 2; i <= context.PageCount; i++)
+						{
+							$("#divPageContainer").append(`
+								<button type="button" class="btn btn-secondary btnPage"  id="${i}" value="${i}">${i}</button>
+							`)
+						}
+
+						$("#divPageContainer").append(`
+							<button type="button" class="btn btn-secondary" id="nextPage">></button>
+						`)
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+				},
+				complete: function () {
+                    setTimeout(function () { $('#loading').css("display", "none"); }, 2000);
+                }
+			})
+		}		
+		//刪除文章
+		$(document).on('click', '.Delete', function (event) {
+			var articleId = parseInt($(this).attr("value"))
+			deleteConfirmation(function () {
+				$.ajax({
+					type: "POST",
+					url: "/TArticles/DeleteAjax",
+					data: { articleId },
+					success: function (data) {
+						Swal.fire(
+							'已刪除',
+							'success'
+						);
+					let page = pageNumber
+					let key = $("#Key").val()
+					let categoryId = $("#CategoryId").find(":selected").val()
+
+					show(key, categoryId, page);
+
+					},
+					error: function (xhr, status, error) {
+						// 處理錯誤
+						console.log("AJAX request error: " + status + " - " + error);
+					}
+				});
+			})
+
+
+		})
+
+		$("#formSearch").submit(function (event) {
+			event.preventDefault();
+			let page = 1
+			let key = $("#Key").val()
+			let categoryId = $("#CategoryId").find(":selected").val()
+
+			show(key, categoryId, page);
+		})
+
+	</script>
+	<script type="text/javascript" src="~/js/ArticlePage.js"></script>
+
+}

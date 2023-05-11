@@ -1,0 +1,197 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "InseparableContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models\/DAL",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "ISpan.InseparableCore",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[tAccountStatuses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tActivities]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tActivityParticipants]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tActors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tAdministrators]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tAreas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tArticleClickedDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tArticleKeywordDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tArticleLikeDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tArticles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tChats]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCinemas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCities]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tComments]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tDirectors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tFriends]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tGenders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tKeywords]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMemberFavoriteMovieCategories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMemberPoints]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMemberReports]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMembers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovieActorDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovieCategories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovieCategoryDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovieCommentDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovieDirectorDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovieKeywordDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovieLevels]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovies]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tMovieScoreDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tOrders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tProductCategories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tProductOrderDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tProducts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tReports]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tRooms]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tSeats]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tSessions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tTicketOrderDetails]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "inseparable.Inseparable.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

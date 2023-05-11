@@ -1,0 +1,105 @@
+﻿@model ISpan.InseparableCore.Models.DAL.TMembers
+
+@{
+    ViewData["Title"] = "Deactivate";
+}
+
+<h1>註銷會員</h1>
+
+<h3>確定要註銷這個會員嗎?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FMemberId)*@
+            會員ID
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FMemberId)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FLastName)*@
+            姓氏
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FLastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FFirstName)*@
+            名字
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FFirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FEmail)*@
+            Email
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FEmail)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FDateOfBirth)*@
+            生日
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FDateOfBirth)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FCellphone)*@
+            手機
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FCellphone)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FAddress)*@
+            住址
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FIntroduction)*@
+            簡介
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FIntroduction)
+        </dd>
+        
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FSignUpTime)*@
+            註冊時間
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FSignUpTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FAccountStatusNavigation)*@
+            會員狀態
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FAccountStatusNavigation.FStatus)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FArea)*@
+            區域
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FArea.FAreaName)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.FGender)*@
+            性別
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FGender.FGenderType)
+        </dd>
+    </dl>
+    
+    <form asp-action="Deactivate">
+        <input type="hidden" asp-for="FId" />
+        <input type="submit" value="註銷" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-light">返回</a>
+    </form>
+</div>

@@ -1,0 +1,161 @@
+﻿@model ISpan.InseparableCore.ViewModels.CseatVM
+
+@{
+    ViewData["Title"] = "Seat";
+}
+
+
+@section Styles{
+    <link href="~/css//Seat.css" rel="stylesheet" />
+}
+    <form action="/Shopping/CartView" method="post" id="seat">
+        @{
+        <div class="title">
+            @foreach (var item in Model.movie)
+            {
+                <h3>@item.FMovieName</h3>
+            }
+            <input type="hidden" name="sessionid" value="@Model.sessionid">
+            <h4><img src="https://img.icons8.com/ultraviolet/40/null/overtime.png" /> @Model.sessions.FSessionDate.ToString("yyyy/MM/dd") @Model.sessions.FSessionTime.Hours : @Model.sessions.FSessionTime.Minutes.ToString("D2")</h4>
+        </div>
+        <div class="left">
+            <span class="seleted"></span><p>您的座位</p>
+            <span class="not-seleted"></span><p>可選座位</p>
+            <span class="solid"></span><p>已售出</p>
+            <p class="alert-danger" style="font-size:15px;" id="ticketnum"></p>
+        </div>
+        <div class="movie">
+            <div class="screen"><p>螢幕</p></div>
+            <div class="seat">
+                <table>
+                    @foreach (var item in Model.seats)
+                    {
+                        <tr>
+                            <td>@item.Key</td>
+                            @foreach (var column in item.Value)
+                            {
+                                <td>
+                                    <div class="not-seleted" value="@column.FSeatId" id="@column.FSeatId">
+                                        @column.FSeatColumn
+                                    </div>
+                                </td>
+
+                                if (column.FSeatColumn == 2 || column.FSeatColumn == 12)
+                                {
+                                    <td><div class="aisle"></div></td>
+                                }
+                            }
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+    }
+    <input type="hidden" name="regular" value="@Model.regularnum" />
+    <input type="hidden" name="concession" value="@Model.concessionnum" />
+    <div class="center" id="btnverif">
+        <input type="submit" value="下一步" class="btn btn-primary" id="button" />
+    </div>
+</form>
+@section Scripts{
+    <script>
+        var num = [];
+        var ticket = @Model.ticket;
+
+        onload = function () {
+            var soldSeatIds = @Html.Raw(Json.Serialize(Model.solid));
+            $(soldSeatIds).each(function (index, value) {
+                $('#' + value).addClass('solid');
+            });
+
+            $('#ticketnum').html(`請選 ${ticket - num.length} 個座位!!!`);
+            if (ticket == num.length) {
+                $('#ticketnum').html(``);
+            }
+
+            //網頁重載 session清空
+            $.ajax({
+                method: 'POST',
+                url: 'Clearticket',
+                data: {},
+                success: function (data) {
+                },
+                error: function (error) {
+                }
+            });
+
+        }
+
+        $("td div").click(function () {
+            //忽略已賣出座位及走道
+            if ($(this).hasClass('solid') | $(this).hasClass('aisle')) {
+                return;
+            }
+            var sessionId = @Model.sessionid;
+            //判斷選取座位及數量 紀錄座位
+            if ($(this).hasClass('seleted')) {
+                $(this).removeClass("seleted");
+                $(this).addClass("not-seleted");
+                var index = num.indexOf($(this).attr('value'));
+                num.splice(index, 1);
+                var seatId = $(this).attr('value');
+
+                $.ajax({
+                    method: 'POST',
+                    url: '/Shopping/TicketItem',
+                    data: {
+                        seatId,
+                        Qty: 0,
+                        sessionId
+                    },
+                    success: function (data) {
+                    },
+                    error: function (error) {
+                    }
+                });
+            }
+            else {
+                num.push($(this).attr('value'));
+                if (num.length > ticket) {
+                    num.pop();
+                    Swal.fire("請先取消再選擇!!");
+                    return;
+                }
+                $(this).removeClass("not-seleted");
+                $(this).addClass("seleted");
+
+                var seatId = $(this).attr('value');
+                $.ajax({
+                    method: 'POST',
+                    url: '/Shopping/TicketItem',
+                    data: {
+                        seatId,
+                        Qty: 1,
+                        sessionId
+                    },
+                    success: function (data) {
+                    },
+                    error: function (error) {
+                    }
+                });
+            }
+            //小提醒
+            $('#ticketnum').html(`請再選 ${ticket - num.length} 個座位 !!!`);
+            if (ticket == num.length) {
+                $('#ticketnum').html(``);
+            }
+        });
+
+        $('#button').click(function (event) {
+            //判斷選擇的位置數量是否正確
+            var regular = @Model.regularnum;
+            var concession = @Model.concessionnum;
+            var session = @Model.sessionid;
+            if (num.length != ticket) {
+                event.preventDefault();
+                Swal.fire(`還有 ${ticket - num.length} 個座位還沒選~~`);
+            }
+        });
+    </script>
+}

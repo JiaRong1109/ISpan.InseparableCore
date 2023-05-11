@@ -1,0 +1,112 @@
+﻿@model ISpan.InseparableCore.ViewModels.CAdminMemberEditVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    .textarea {
+        min-height: 10rem !important;
+    }
+</style>
+
+<h1>編輯會員</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="MemberId" class="control-label">會員ID</label>
+                <input asp-for="MemberId" class="form-control text-light" />
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">姓氏</label>
+                <input asp-for="LastName" class="form-control text-light" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">名字</label>
+                <input asp-for="FirstName" class="form-control text-light" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control text-light" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label">生日</label>
+                <input asp-for="DateOfBirth" class="form-control text-light" type="date" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenderId" class="control-label">性別</label>
+                <select asp-for="GenderId" class="form-control text-light" asp-items="ViewBag.GenderId"></select>
+                <span asp-validation-for="GenderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cellphone" class="control-label">手機</label>
+                <input asp-for="Cellphone" class="form-control text-light" />
+                <span asp-validation-for="Cellphone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label">城市</label>
+                <select asp-for="City" class="form-control text-light" asp-items="ViewBag.Cities" id="citySelect">
+                    <option value="">請選擇縣市</option>
+                </select>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Area" class="control-label">區域</label>
+                <select asp-for="Area" class="form-control text-light" asp-items="ViewBag.Areas" id="areaSelect">
+                    <option value="">請選擇區域</option>
+                </select>
+                <span asp-validation-for="Area" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">住址</label>
+                <input asp-for="Address" class="form-control text-light" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="FPhotoPath" class="control-label"></label>
+                <input asp-for="FPhotoPath" class="form-control" />
+                <span asp-validation-for="FPhotoPath" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Introduction" class="control-label">簡介</label>
+                <textarea asp-for ="Introduction" class="form-control textarea text-light"></textarea>
+                <span asp-validation-for="Introduction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountStatus" class="control-label">會員狀態</label>
+                <select asp-for="AccountStatus" class="form-control text-light" asp-items="ViewBag.AccountStatus">
+                    <option value="">請選擇</option>
+                </select>
+                <span asp-validation-for="AccountStatus" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="FTotalMemberPoint" class="control-label"></label>
+                <input asp-for="FTotalMemberPoint" class="form-control" />
+                <span asp-validation-for="FTotalMemberPoint" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="送出" class="btn btn-primary" /> |
+                <a asp-action="Index" class="btn btn-light">返回</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="~/js/addressEdit.js"></script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
